@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class playerHealth : MonoBehaviour {
@@ -23,7 +24,7 @@ public class playerHealth : MonoBehaviour {
 	//渲染2D圖形
 	private SpriteRenderer rend;
 	//血量介面
-	private GUITexture[] heartsGUI;
+	private Image[] heartsGUI;
 	private int health;
 	
 	void Start () {
@@ -33,11 +34,11 @@ public class playerHealth : MonoBehaviour {
 		GameObject getHearts = GameObject.Find("GUI/hearts");
 		//得到血量並增加到血量並撥放更新於GUI介面
 		getHearts.SendMessage("addHearts", hearts, SendMessageOptions.DontRequireReceiver);
-		GUITexture[] allChildren = getHearts.GetComponentsInChildren<GUITexture>();
-		heartsGUI = new GUITexture[allChildren.Length];
+        Image[] allChildren = getHearts.GetComponentsInChildren<Image>();
+		heartsGUI = new Image[allChildren.Length];
 		health = allChildren.Length*2;
 		for(int i = 0;i < allChildren.Length;i++){
-			heartsGUI[i] = allChildren[i] as GUITexture;
+			heartsGUI[i] = allChildren[i] as Image;
 		}
 		rend = GetComponent<SpriteRenderer>();
 	}
@@ -139,15 +140,15 @@ public class playerHealth : MonoBehaviour {
 			int check = (i+1)*2;
 			//如果血格是滿的
 			if(check < health+1){
-				heartsGUI[i].texture = full;
+				heartsGUI[i].GetComponent<RawImage>().texture = full;
 			}
 			//如果血格是半滿
 			if(check == health+1){
-				heartsGUI[i].texture = half;
+				heartsGUI[i].GetComponent<RawImage>().texture = half;
 			}
 			//如果血格是空的
 			if(check > health+1){
-				heartsGUI[i].texture = empty;
+				heartsGUI[i].GetComponent<RawImage>().texture = empty;
 			}
 		}
 	}
