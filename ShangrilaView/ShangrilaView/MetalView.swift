@@ -22,6 +22,7 @@ struct MetalView: NSViewRepresentable {
     func makeNSView(context: Context) -> MTKView {
         let device = MTLCreateSystemDefaultDevice()!
         let mtkView = MTKView(frame: .zero, device: device)
+        mtkView.depthStencilPixelFormat = .depth32Float
         mtkView.clearColor = MTLClearColorMake(0.1, 0.1, 0.1, 1.0)
 
         let renderer = Renderer(mtkView: mtkView)
