@@ -45,3 +45,13 @@ func matrix_perspective_left_hand(fovyRadians: Float, aspect: Float, nearZ: Floa
         SIMD4<Float>(0, 0, wz, 0)
     ))
 }
+
+func matrix4x4_scale(_ sx: Float, _ sy: Float, _ sz: Float) -> matrix_float4x4 {
+    return matrix_float4x4(columns: (
+        simd_float4(sx,  0,  0,  0),
+        simd_float4( 0, sy,  0,  0),
+        simd_float4( 0,  0, sz,  0),
+        simd_float4( 0,  0,  0,  1)
+    ))
+}
+
